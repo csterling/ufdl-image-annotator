@@ -39,7 +39,7 @@ type Props = {
   onExit: (MainLayoutState) => any,
   deleteImage:(MainLayoutState) => any,
   updateIndex:(MainLayoutState) => any,
-  addImages:any,
+  addImages:(MainLayoutState) => any,
   videoTime?: number,
   videoSrc?: string,
   keyframes?: Object,
@@ -139,7 +139,7 @@ export const Annotator = ({
       } else if (action.buttonName === "Next" && onNextImage) {
         return updateIndex(without(state, "history")),
         onNextImage(without(state, "history"))
-        
+
       } else if (action.buttonName === "Prev" && onPrevImage) {
         return onPrevImage(without(state, "history")),
         updateIndex(without(state, "history"))
@@ -148,8 +148,7 @@ export const Annotator = ({
         return deleteImage(without(state, "history"))
       }
       else if (action.buttonName === "Add Images") {
-        return onExit(without(state, "history")),
-        addImages(without(state, "history"))
+        return addImages(without(state, "history"))
       }
     }
     dispatchToReducer(action)
